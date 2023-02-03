@@ -24,9 +24,8 @@
           v-model="name"
           :disabled="nameDisabled"
           @change="
-            logFileStore.setPath(
-              this.require('path').join(directory, 'Logs', `eqlog_${name}_${server}.txt`)
-            )
+            logStore.setPath(logPath);
+            logStore.setPlayerName(name);
           "
         >
           <option v-for="name in servers[server]" :key="name">
@@ -36,7 +35,7 @@
       </div>
       <div class="pure-control-group">
         <label>Selected Log File</label>
-        <span>{{ logFileStore.path }}</span>
+        <span>{{ logStore.path }}</span>
       </div>
     </form>
   </div>
@@ -46,6 +45,10 @@
 import { logFileStore } from "@/stores/logfile.js";
 
 export default {
+  setup() {
+    const logStore = logFileStore();
+    return { logStore };
+  },
   data() {
     return {
       directory: "",
@@ -92,8 +95,9 @@ export default {
     },
   },
   computed: {
-    logFileStore: function () {
-      return logFileStore();
+    logPath() {
+      const path = this.require("path");
+      return path.join(this.directory, "Logs", `eqlog_${this.name}_${this.server}.txt`);
     },
   },
 };
