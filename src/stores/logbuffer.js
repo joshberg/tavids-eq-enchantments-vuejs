@@ -11,6 +11,6 @@ export const logBufferStore = defineStore('logBuffer', {
       this.buffer.push(data);
       if(this.buffer.length > 1000)
         this.buffer.shift();
-    }
-  }
+    },
+  },
 });

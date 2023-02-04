@@ -150,3 +150,7 @@ This is not for those *using* this repo, but for those *maintaining* it.
    * Update the Node version number in the README "Running Locally"
 1. Bump the version number, and all the npm scripts that reference the version number
 1. Run `npm run regression` after updating dependencies or other major changes to verify builds still work correctly
+
+
+## Sounds source
+[bell](https://freesound.org/people/DavidKronberg/sounds/591446/) - By David Kronberg

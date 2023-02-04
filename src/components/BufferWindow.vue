@@ -1,7 +1,7 @@
 <template>
   <h2>Buffer</h2>
   <div class="container">
-    <div class="buffer">
+    <div id="buffer-window" class="buffer">
       <pre>{{ blob }}</pre>
       <pre><span v-for="(x, index) in logBuffer.buffer" :key="index">{{ x }}<br/></span></pre>
     </div>
@@ -15,6 +15,7 @@ import { logBufferStore } from "@/stores/logbuffer";
 export default {
   setup() {
     const logBuffer = logBufferStore();
+
     return {
       logBuffer,
     };
@@ -48,6 +49,8 @@ export default {
         const tail = new Tail(lclPath, "\n", { interval: 500 });
         tail.on("line", (data) => {
           this.logBuffer.append(data);
+          let div = document.getElementById("buffer-window");
+          div.scrollTop = div.scrollHeight;
         });
         tail.on("error", (err) => {
           console.log(err);

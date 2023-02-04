@@ -64,6 +64,8 @@ export default {
             )
         );
 
+        if (dpsMsgs.length == 0) return;
+
         const dps = dpsMsgs.map((x) => {
           return {
             time: getDate(x),
@@ -72,6 +74,8 @@ export default {
         });
 
         const recent = dps.filter((x) => x.time > Date.now() - 30000);
+
+        if (recent.length == 0) return;
 
         this.sampleSize = recent.length;
         this.sampleTimeFrame = (recent.slice(-1)[0].time - recent[0].time) / 1000;
