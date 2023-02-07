@@ -12,6 +12,7 @@
         <td class="smalltext">{{ tell.what }}</td>
         <td>{{ tell.name }}</td>
         <td class="smalltext">{{ ((Date.now() - tell.time) / 1000).toFixed(0) }} (s)</td>
+        <td>{{ tell.dest }}</td>
       </tr>
     </tbody>
   </table>
@@ -61,12 +62,23 @@ export default {
           let name = tellText.trim().split(" tells you")[0];
           let what = tellText.split(" tells you, ")[1];
           let time = getDate(tell);
-
+          let dest = tellText.split(" tells you,")[1].match(/\w+ to \w+/g);
+          let currDest;
           if (!this.who[name] && this.isChimeOn) {
             // Play chime
             this.playChime();
+          } else {
+            if (this.who[name]?.dest?.length > 0) {
+              currDest = this.who[name].dest;
+            }
           }
-          this.who[name] = { what, time, name };
+
+          this.who[name] = {
+            what,
+            time,
+            name,
+            dest: currDest ? currDest : dest && dest.length > 0 ? dest : "",
+          };
         });
 
         //Truncate who to tells less than 5 minutes old
