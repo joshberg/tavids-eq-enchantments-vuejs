@@ -5,3 +5,12 @@
 .ml-2 {
     margin-left: 2em;
 }
+
+.m1 {
+  margin: 1em;
+}
+
+.mx1 {
+  margin-left: 1em;
+  margin-right: 1em;
+}

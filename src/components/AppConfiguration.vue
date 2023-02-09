@@ -26,6 +26,7 @@
           @change="
             logStore.setPath(logPath);
             logStore.setPlayerName(name);
+            saveConfiguration();
           "
         >
           <option v-for="name in servers[server]" :key="name">
@@ -44,10 +45,31 @@
 <script>
 import { logFileStore } from "@/stores/logfile.js";
 
+const settingsPath = "./settings.json";
+
 export default {
   setup() {
     const logStore = logFileStore();
     return { logStore };
+  },
+  mounted() {
+    const fs = this.require("fs");
+    const lclLogStore = this.logStore;
+    if (fs.existsSync(settingsPath)) {
+      const settings = JSON.parse(fs.readFileSync(settingsPath));
+      if (settings !== undefined) {
+        this.directory = settings.directory;
+
+        this.scanLogs(null, () => {
+          this.server = settings.server;
+          this.nameDisabled = false;
+          this.name = settings.name;
+
+          lclLogStore.setPath(this.logPath);
+          lclLogStore.setPlayerName(this.name);
+        });
+      }
+    }
   },
   data() {
     return {
@@ -61,11 +83,11 @@ export default {
     };
   },
   methods: {
-    scanLogs(event) {
+    scanLogs(event, cb) {
       if (this.isDesktop) {
         const fs = this.require("fs");
         const path = this.require("path");
-        this.directory = event.target?.files[0]?.path;
+        if (event) this.directory = event.target?.files[0]?.path;
         const logsPath = path.join(this.directory, "Logs");
         try {
           if (fs.existsSync(logsPath)) {
@@ -85,6 +107,7 @@ export default {
               }
             });
             this.serverDisabled = false;
+            if (cb !== undefined && typeof cb === "function") cb();
           }
         } catch (err) {
           this.names = [];
@@ -92,6 +115,18 @@ export default {
           this.error = true;
         }
       }
+    },
+    saveConfiguration() {
+      const fs = this.require("fs");
+      const settings = {
+        directory: this.directory,
+        server: this.server,
+        name: this.name,
+      };
+
+      fs.writeFileSync(settingsPath, JSON.stringify(settings), {
+        encoding: "utf-8",
+      });
     },
   },
   computed: {

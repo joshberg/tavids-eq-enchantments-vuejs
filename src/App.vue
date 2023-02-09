@@ -1,5 +1,5 @@
 <template>
-  <div class="pure-g">
+  <div class="pure-g mx1">
     <div class="pure-u-3-8 pure-u-md-1-3 pure-u-sm-1-1">
       <app-configuration />
     </div>

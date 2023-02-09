@@ -171,7 +171,7 @@ export default {
           const lcldps = lcldpsMsgs.map((x) => {
             return {
               time: getDate(x),
-              dmg: parseInt(x.replace(timeStampRegex, "").match(/\d+/g)[0]),
+              dmg: parseInt(x.replace(timeStampRegex, "").match(/\d+/g)?.[0] ?? 0),
             };
           });
 

@@ -46,10 +46,14 @@ export default {
 
         this.blob = fs.readFileSync(lclPath);
 
+        let div = document.getElementById("buffer-window");
+        setTimeout(() => {
+          div.scrollTop = div.scrollHeight;
+        }, 500);
+
         const tail = new Tail(lclPath, "\n", { interval: 500 });
         tail.on("line", (data) => {
           this.logBuffer.append(data);
-          let div = document.getElementById("buffer-window");
           div.scrollTop = div.scrollHeight;
         });
         tail.on("error", (err) => {
