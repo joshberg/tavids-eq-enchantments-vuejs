@@ -81,11 +81,11 @@ export default {
           };
         });
 
-        //Truncate who to tells less than 5 minutes old
+        //Truncate who to tells less than 10 minutes old
         const keys = Object.keys(this.who);
         keys.forEach((key) => {
           let obj = this.who[key];
-          if (Date.now() - obj.time > 300000) delete this.who[key];
+          if (Date.now() - obj.time > 600000) delete this.who[key];
         });
       },
       deep: true,

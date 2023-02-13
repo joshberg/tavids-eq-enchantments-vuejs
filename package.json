@@ -22,7 +22,7 @@
   "scripts": {
     "start": "concurrently npm:dev:web npm:dev:desktop",
     "dev:web": "vite --port 4175",
-    "dev:desktop": "wait-on -c waitOnConfig.json http-get://localhost:4175 && nw .",
+    "dev:desktop": "wait-on -c waitOnConfig.json http-get://localhost:4175 && nw . --enable-transparent-visuals --disable-gpu",
     "build": "npm run build:clean && npm run build:vue && npm run build:nw",
     "build:clean": "rimraf ./dist-vue ./dist",
     "build:vue": "vite build",
