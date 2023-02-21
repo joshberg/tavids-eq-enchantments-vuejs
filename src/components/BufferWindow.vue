@@ -46,6 +46,10 @@ export default {
 
         this.blob = fs.readFileSync(lclPath);
 
+        // Erase everything in the file to make loading faster
+        //TODO: Make this optional
+        fs.writeFileSync(lclPath, "");
+
         let div = document.getElementById("buffer-window");
         setTimeout(() => {
           div.scrollTop = div.scrollHeight;
