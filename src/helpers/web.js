@@ -4,7 +4,8 @@ const p99root = "https://wiki.project1999.com/";
 const mobInfoItems = ['AC',
   'agro_radius', 'attack_speed', 'attacks_per_round', 'class', 'damage_per_hit',
   'HP', 'HP_regen', 'level', 'mana_regen', 'name', 'race', 'respawn_time',
-  'run_speed', 'special', 'zone', 'location', 'known_loot'
+  'run_speed', 'special', 'zone', 'location', 'known_loot', 'factions',
+  'opposing_factions', 'related_quests'
 ];
 
 let browser;
@@ -53,7 +54,7 @@ var GetMobInfo = async (target) => {
           }
         }
       } else if (key === "location"){
-        mob[key] = value.split('),').map(x => x.trim());
+        mob[key] = value.split('), ').map(x => x.replace('(','').replace(')','').trim());
       } else {
         mob[key] = value;
       }
