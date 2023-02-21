@@ -5,7 +5,7 @@ const mobInfoItems = ['AC',
   'agro_radius', 'attack_speed', 'attacks_per_round', 'class', 'damage_per_hit',
   'HP', 'HP_regen', 'level', 'mana_regen', 'name', 'race', 'respawn_time',
   'run_speed', 'special', 'zone', 'location', 'known_loot', 'factions',
-  'opposing_factions', 'related_quests'
+  'opposing_factions', 'related_quests', 'description'
 ];
 
 let browser;
