@@ -1,3 +1,8 @@
+body {
+  background-color: #333;
+  color: lightgray;
+}
+
 .ml-1 {
     margin-left: 1em;
 }
@@ -13,4 +18,13 @@
 .mx1 {
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.mb0 {
+  margin-bottom: 0em;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-between;
 }

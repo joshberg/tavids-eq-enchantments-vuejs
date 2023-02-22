@@ -35,6 +35,9 @@ var GetMobInfo = async (target) => {
       let value;
       if (splitLine[1] === undefined) {
         value = '';
+      } else if (lines[k].includes('drare')){
+        splitLine.shift(1);
+        value = splitLine.join('=').replace('{{:','').replace('}}','').replace('Overall: ', '');
       } else if (splitLine.length > 2) {
         splitLine.shift();
         splitLine[splitLine.length - 1] = splitLine[splitLine.length - 1].substring(0, splitLine[splitLine.length - 1].indexOf('}}'));
@@ -49,12 +52,14 @@ var GetMobInfo = async (target) => {
         if (value.includes('-')) {
           const numbs = value.split('-');
           mob[key] = {
-            min: numbs[0],
-            max: numbs[1]
+            min: numbs[0].trim(),
+            max: numbs[1].trim()
           }
         }
       } else if (key === "location"){
         mob[key] = value.split('), ').map(x => x.replace('(','').replace(')','').trim());
+      } else if (key === "related_quests") {
+        mob[key] = value.split('Category')[0].replace('}}','');
       } else {
         mob[key] = value;
       }
