@@ -170,7 +170,7 @@ dl {
 }
 dt,
 dd {
-  padding: 2% 5%;
+  padding: 2% 2%;
 }
 dt {
   display: table-cell;
