@@ -1,6 +1,6 @@
 <template>
   <h2>Target Info</h2>
-  <form class="pure-form pure-form-aligned">
+  <form class="pure-form">
     <div class="pure-control-group">
       <label>Targeting Phrase</label>
       <input type="text" v-model="targetphrase" />
