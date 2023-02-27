@@ -36,7 +36,6 @@
     "regression": "rd /s /q node_modules & rd /s /q node_modules & rd /s /q node_modules & npm install && npm run lint && npm test && npm run build:win && npm run run:win",
     "lint": "eslint --ext .js,.vue --config=.eslintrc.js src vite.config.js .eslintrc.js",
     "fix": "eslint --fix --ext .js,.vue --config=.eslintrc.js src vite.config.js .eslintrc.js",
-    "test": "vitest run --coverage",
     "update:vue-devtools": "rimraf ./node_modules/your-app-name-devtools-prebuilt && npm install"
   },
   "dependencies": {
